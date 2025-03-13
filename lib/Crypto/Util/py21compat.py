@@ -59,16 +59,14 @@ except NameError:
 #   isinstance(x, (int, long))
 # So we hack it for Python 2.1.
 try:
-    isinstance(5, (int, long))
+    isinstance(5, int)
 except TypeError:
     __all__ += ['isinstance']
     _builtin_type_map = {
         tuple: type(()),
         list: type([]),
         str: type(""),
-        unicode: type(u""),
-        int: type(0),
-        long: type(0L),
+        int: type(0)
     }
     def isinstance(obj, t):
         if not __builtin__.isinstance(t, type(())):

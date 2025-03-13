@@ -47,7 +47,7 @@ class StrongRandom(object):
         """Return a python long integer with k random bits."""
         if self._randfunc is None:
             self._randfunc = Random.new().read
-        mask = (1L << k) - 1
+        mask = (1 << k) - 1
         return mask & bytes_to_long(self._randfunc(ceil_div(k, 8)))
 
     def randrange(self, *args):
@@ -64,9 +64,9 @@ class StrongRandom(object):
             step = 1
         else:
             raise TypeError("randrange expected at most 3 arguments, got %d" % (len(args),))
-        if (not isinstance(start, (int, long))
-                or not isinstance(stop, (int, long))
-                or not isinstance(step, (int, long))):
+        if (not isinstance(start, int)
+                or not isinstance(stop, int)
+                or not isinstance(step, int)):
             raise TypeError("randrange requires integer arguments")
         if step == 0:
             raise ValueError("randrange step argument must not be zero")
@@ -86,7 +86,7 @@ class StrongRandom(object):
 
     def randint(self, a, b):
         """Return a random integer N such that a <= N <= b."""
-        if not isinstance(a, (int, long)) or not isinstance(b, (int, long)):
+        if not isinstance(a, int) or not isinstance(b, int):
             raise TypeError("randint requires integer arguments")
         N = self.randrange(a, b+1)
         assert a <= N <= b
